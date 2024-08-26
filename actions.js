@@ -1,23 +1,16 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-
-
-
-
-
+// Creates a new pool instance
 const pool = new Pool({
   user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   host: process.env.DB_HOST,
   database: process.env.DATABASE,
-  password: process.env.DB_PASS,
 });
 
 
-
-
-
-
+// Function to view the 'department' table
 const viewDepartments = async () => {
   try {
     const res = await pool.query('SELECT * FROM department');
@@ -28,13 +21,7 @@ const viewDepartments = async () => {
 };
 
 
-
-
-
-
-
-
-
+// Function to view the 'role' table
 const viewRoles = async () => {
   try {
     const res = await pool.query('SELECT r.id, r.title, r.salary, d.name AS department FROM role r JOIN department d ON r.department_id = d.id'); // run query to get all roles
@@ -45,14 +32,7 @@ const viewRoles = async () => {
 };
 
 
-
-
-
-
-
-
-
-
+// Function to view the 'employee' table
 const viewEmployees = async () => {
   try {
     const res = await pool.query(`
@@ -69,15 +49,7 @@ const viewEmployees = async () => {
 };
 
 
-
-
-
-
-
-
-
-
-
+// Function to add a new department in the 'department' table
 const addDepartment = async (name) => {
   try {
     await pool.query('INSERT INTO department (name) VALUES ($1)', [name]);
@@ -88,13 +60,7 @@ const addDepartment = async (name) => {
 };
 
 
-
-
-
-
-
-
-
+// Function to add a new role in the 'role' table
 const addRole = async (title, salary, departmentName) => {
   try {
     const depRes = await pool.query('SELECT id FROM department WHERE name = $1', [departmentName]);
@@ -107,13 +73,7 @@ const addRole = async (title, salary, departmentName) => {
 };
 
 
-
-
-
-
-
-
-
+// Function to add a new employee in the 'employee' table
 const addEmployee = async (first_name, last_name, roleTitles) => {
   try {
     const roleRes = await pool.query('SELECT id FROM role WHERE title = $1', [roleTitles]);
@@ -126,16 +86,7 @@ const addEmployee = async (first_name, last_name, roleTitles) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
+// Function to update an employees role
 const updateEmployeeRole = async (employeeName, roleTitle) => {
   try {
     const employeeNames = employeeName.split(' ');
@@ -154,15 +105,7 @@ const updateEmployeeRole = async (employeeName, roleTitle) => {
 };
 
 
-
-
-
-
-
-
-
-
-
+// Exports functions to be used in index.js
 module.exports = {
   viewDepartments,
   viewRoles,

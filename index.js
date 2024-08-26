@@ -1,14 +1,6 @@
 const inquirer = require('inquirer');
 require('dotenv').config();
-
-
-
-
-
-
-
 const {
-
     viewDepartments,
     viewRoles,
     viewEmployees,
@@ -16,14 +8,10 @@ const {
     addRole,
     addEmployee,
     updateEmployeeRole,
-
 } = require('./actions');
 
 
-
-
-
-
+/******************************************** Inquirer prompt ********************************************/
 
 
 const startMenu = async () => {
@@ -82,9 +70,7 @@ const startMenu = async () => {
 };
 
 
-
-
-
+// Function to create a new Department
 
 const promptAddDepartment = async () => {
     const answer = await inquirer.prompt({
@@ -96,10 +82,7 @@ const promptAddDepartment = async () => {
 };
 
 
-
-
-
-
+// Function to create a new Role
 
 const promptAddRole = async () => {
     const departments = await viewDepartments();
@@ -126,7 +109,7 @@ const promptAddRole = async () => {
 };
 
 
-
+// Function to create a new Employee
 
 const promptAddEmployee = async () => {
     const roles = await viewRoles();
@@ -153,7 +136,7 @@ const promptAddEmployee = async () => {
 };
 
 
-
+// Function to Update an Employee Role
 
 const promptUpdateEmployeeRole = async () => {
   const employees = await viewEmployees();
@@ -176,10 +159,6 @@ const promptUpdateEmployeeRole = async () => {
   ]);
   await updateEmployeeRole(answers.employee, answers.role);
 };
-
-
-
-
 
 
 // initializes app
