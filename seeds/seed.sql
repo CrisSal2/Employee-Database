@@ -3,7 +3,7 @@ INSERT INTO department (name) VALUES
 ('Sales'), -- 1
 ('Engineering'), -- 2
 ('Finance'), -- 3
-('Leagal'), -- 4
+('Legal'); -- 4
 
 -- Comment on the right is the automatic role id it's given
 INSERT INTO role (title, salary, department_id) VALUES 

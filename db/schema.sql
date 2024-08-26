@@ -11,7 +11,6 @@ CREATE TABLE department (
     name VARCHAR(30)
 );
 
-
 CREATE TABLE role (
     id SERIAL NOT NULL PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
@@ -21,7 +20,6 @@ CREATE TABLE role (
     REFERENCES department(id)
     ON DELETE CASCADE
 );
-
 
 CREATE TABLE employee (
     id SERIAL NOT NULL PRIMARY KEY,
