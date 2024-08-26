@@ -136,14 +136,25 @@ const addEmployee = async (first_name, last_name, roleTitles) => {
 
 
 
-const updateEmployeeRole = async (employeeName, roleTitles) => {
+const updateEmployeeRole = async (employeeName, roleTitle) => {
   try {
     const employeeNames = employeeName.split(' ');
-    const roleRes = await pool.query('SELECT id FROM role WHERE title = $1', [roleTitles]);
+    if (employeeNames.length < 2) {
+      throw new Error('Employee name is not in the expected format');
+    }
+    
+    const roleRes = await pool.query('SELECT id FROM role WHERE title = $1', [roleTitle]);
+    if (roleRes.rows.length === 0) {
+      throw new Error('Role not found');
+    }
     const roleId = roleRes.rows[0].id;
 
-    await pool.query('UPDATE employee SET role_id = $1, WHERE first_name = $2 AND last_name = $3', [roleId, employeeNames[0], employeeNames[1]]);
-    console.log(`Updated employee: ${employeeName} with new role: ${roleTitles}`);
+    await pool.query(
+      'UPDATE employee SET role_id = $1 WHERE first_name = $2 AND last_name = $3',
+      [roleId, employeeNames[0], employeeNames.slice(1).join(' ')]
+    );
+    
+    console.log(`Updated employee: ${employeeName} with new role: ${roleTitle}`);
   } catch (err) {
     console.error('Error executing query', err.stack);
   }
