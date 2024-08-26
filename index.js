@@ -17,7 +17,7 @@ const {
     addEmployee,
     updateEmployeeRole,
 
-} = require('./selections');
+} = require('./actions');
 
 
 
