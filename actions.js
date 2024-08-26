@@ -139,14 +139,7 @@ const addEmployee = async (first_name, last_name, roleTitles) => {
 const updateEmployeeRole = async (employeeName, roleTitle) => {
   try {
     const employeeNames = employeeName.split(' ');
-    if (employeeNames.length < 2) {
-      throw new Error('Employee name is not in the expected format');
-    }
-    
     const roleRes = await pool.query('SELECT id FROM role WHERE title = $1', [roleTitle]);
-    if (roleRes.rows.length === 0) {
-      throw new Error('Role not found');
-    }
     const roleId = roleRes.rows[0].id;
 
     await pool.query(
