@@ -6,7 +6,11 @@
 ## Description
   
   - An SQL database to keep track of employees, salaries, roles, and departments.
-  
+
+#Video Guide:
+
+ - https://youtu.be/OkfMGeRWNo8
+
 ## Table of Contents
   
   - [Installation](#installation)
